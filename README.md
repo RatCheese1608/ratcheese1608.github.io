@@ -1,8 +1,6 @@
-## Welcome to GitHub Pages
+## As we can see, I'm just using github to host my own site, coz I need it for school
 
-You can use the [editor on GitHub](https://github.com/RayCist1608/raycist1608.github.io/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+I don't have much to comment about because as you can see. This is just my own private site for school, I don't even know how you found it but who cares.
 
 ### Markdown
 
