@@ -1,6 +1,8 @@
-var serv=[], cImage, promised=0;
+var serv={}, cImage, promised=0;
 var qPic
 
+const stor = "storageIndex.json";
+const rand = "random.json"
 var ansOpt="";
 var enhel=100, plhel=100;
 var enemy, player;
@@ -11,7 +13,7 @@ function getData(api, callback) {
 		.then(res => res.json())
 		.then(dat => {
 			promised-=1
-			serv.push(dat)
+			serv[api]=dat;
 			if (promised==0) callback();
 			return dat;
 		})
@@ -23,14 +25,14 @@ function setAnsOpt(n) {
 }
 
 function nextImage() {
-	qPic.src=serv[0].Path+'/'+serv[0].Images[++cImage];
+	qPic.src=serv[stor].Path+'/'+serv[stor].Images[++cImage];
 }
 
 // attack...
 function attack() {
 	if (ansOpt) {
 		nextImage();
-		if (ansOpt==serv[0].Answers[cImage]) {
+		if (ansOpt==serv[stor].Answers[cImage]) {
 			enhel-=10;
 			enemy.textContent = Math.max(enhel,0);
 			setTimeout(()=>{if (enhel<=0) alert("Selamat! Kamu Menang!");},100);
@@ -68,14 +70,14 @@ function main() {
 		if (i==9) {
 			clearInterval(preloading);
 		}
-		let filename = serv[0].Images[i];
-		preloadImage.src=serv[0].Path+'/'+filename;
+		let filename = serv[stor].Images[i];
+		preloadImage.src=serv[stor].Path+'/'+filename;
 		i++;
 	},250);
 
 	// set the first pic
 	cImage=0;
-	qPic.src=serv[0].Path+'/'+serv[0].Images[cImage];
+	qPic.src=serv[stor].Path+'/'+serv[stor].Images[cImage];
 }
 
 // load from api
