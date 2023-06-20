@@ -3,6 +3,7 @@ var qPic
 
 const stor = "storageIndex.json";
 const rand = "random.json"
+
 var ansOpt="";
 var enhel=100, plhel=100;
 var enemy, player;
