@@ -8,10 +8,32 @@
 	<script src="random.js"></script>
 </head>
 <body>
-	<h1>Fetching test file</h1>
-	<p>
-		There should be a picture below
-	</p>
-	<img src="" alt="Sample Picture" id="pic">
+	<div id="root">
+		<div id="game">
+			test
+		</div>
+		<div id="container">
+			<div id="question">
+				<h1>The Question</h1>
+				<img src="" alt="question pic">
+			</div>
+			<div id="answer">
+				<button class="ansbtn">A</button>
+				<button class="ansbtn">B</button>
+				<button class="ansbtn">C</button>
+				<button class="ansbtn">D</button>
+			</div>
+			<div id="move">
+				<button id="defend" onClick="defend()">
+					<h2>DEFEND</h2>
+					<p>Lompatkan Soalnya</p>
+				</button>
+				<button id="attack" onClick="attack()">
+					<h2>ATTACK</h2>
+					<p>Jawab Soalnya</p>
+				</button>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
