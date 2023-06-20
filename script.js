@@ -1,23 +1,21 @@
-var serv, cImage;
+var serv=[], cImage, promised=0;
 var qPic
 
 var ansOpt="";
 var enhel=100, plhel=100;
 var enemy, player;
 
-// getting storage info
-function getData() {
-	if (serv) return Promise.resolve(serv);
-	return fetch('storageIndex.json')
-		.then(res => {
-			// console.log("res:",res.text());
-			return res.json()
+function getData(api, callback) {
+	promised++;
+	return fetch(api)
+		.then(res => res.json())
+		.then(dat => {
+			promised-=1
+			serv.push(dat)
+			if (promised==0) callback();
+			return dat;
 		})
-		.then(data => {
-			console.log("data:",data);
-			serv = data;
-			return data;})
-		.catch(err => console.log(err));
+		.catch(err => console.log(err))
 }
 
 function setAnsOpt(n) {
@@ -25,14 +23,14 @@ function setAnsOpt(n) {
 }
 
 function nextImage() {
-	qPic.src=serv.Path+'/'+serv.Images[++cImage];
+	qPic.src=serv[0].Path+'/'+serv[0].Images[++cImage];
 }
 
 // attack...
 function attack() {
 	if (ansOpt) {
 		nextImage();
-		if (ansOpt==serv.Answers[cImage]) {
+		if (ansOpt==serv[0].Answers[cImage]) {
 			enhel-=10;
 			enemy.textContent = Math.max(enhel,0);
 			setTimeout(()=>{if (enhel<=0) alert("Selamat! Kamu Menang!");},100);
@@ -61,10 +59,8 @@ window.onload = ()=> {
 }
 
 // main basically
-getData().then(dat=>{
-	serv = dat;
-	console.log("serv:", serv);
-
+function main() {
+	console.log("serv",serv);
 	// preloading img
 	var preloadImage = new Image();
 	let i=0;
@@ -72,12 +68,16 @@ getData().then(dat=>{
 		if (i==9) {
 			clearInterval(preloading);
 		}
-		let filename = serv.Images[i];
-		preloadImage.src=serv.Path+'/'+filename;
+		let filename = serv[0].Images[i];
+		preloadImage.src=serv[0].Path+'/'+filename;
 		i++;
 	},250);
 
 	// set the first pic
 	cImage=0;
-	qPic.src=serv.Path+'/'+serv.Images[cImage];
-}).catch(err => console.log(err));
+	qPic.src=serv[0].Path+'/'+serv[0].Images[cImage];
+}
+
+// load from api
+getData('storageIndex.json', main)
+getData('random.json', main)
