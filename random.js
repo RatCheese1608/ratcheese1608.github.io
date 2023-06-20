@@ -7,7 +7,7 @@ function getData() {
 	return fetch('storageIndex.php')
 		.then(res => {
 			console.log("res:",res);
-			// res.json()
+			res.json()
 		})
 		// .then(data => {
 		// 	console.log("data:",data);
