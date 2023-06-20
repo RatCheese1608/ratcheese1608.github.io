@@ -2,6 +2,8 @@
 
 I don't have much to comment about because as you can see. This is just my own private site for school, I don't even know how you found it but who cares.
 
+[Open webpage](https://ratcheese1608.github.io)
+
 ### Markdown
 
 Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
