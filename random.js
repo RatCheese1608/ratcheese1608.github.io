@@ -7,12 +7,12 @@ function getData() {
 	return fetch('storageIndex.php')
 		.then(res => {
 			console.log("res:",res);
-			res.json()
+			// res.json()
 		})
-		.then(data => {
-			console.log("data:",data);
-			phpDat = data;
-			return data;})
+		// .then(data => {
+		// 	console.log("data:",data);
+		// 	phpDat = data;
+		// 	return data;})
 		.catch(err => console.log(err));
 }
 
