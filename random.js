@@ -6,7 +6,7 @@ function getData() {
 	if (phpDat) return Promise.resolve(phpDat);
 	return fetch('storageIndex.php')
 		.then(res => {
-			console.log("res:",res);
+			console.log("res:",res.text());
 			return res.json()
 		})
 		.then(data => {
