@@ -23,7 +23,7 @@ body {
 	background-color: #ACDEFD;
 }
 
-#game, #container {
+#battle, #container {
 	padding: 3vh;
 	border-radius: 3vh;
 	box-sizing: border-box;
@@ -32,7 +32,7 @@ body {
 	overflow: hidden;
 }
 
-#game {
+#battle {
 	margin: 3% auto;
 	height: 50%;
 	border: 5px solid green;
@@ -43,7 +43,7 @@ body {
 	background-color: lightgreen;
 }
 
-#game > * {
+#battle > * {
 	margin: 0 8%;
 }
 
