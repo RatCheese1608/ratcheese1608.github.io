@@ -29,22 +29,28 @@ body {
 	box-sizing: border-box;
 	display: flex;
 	margin-bottom: 0;
+	overflow: hidden;
 }
 
 #game {
-	margin: 4% auto;
-	width: 92%;
+	margin: 3% auto;
+	height: 50%;
 	border: 5px solid green;
-	aspect-ratio: 3.5;
+	aspect-ratio: 3.45;
 	display: flex;
+	justify-content: space-between;
 	z-index: 0;
 	background-color: lightgreen;
 }
 
+#game > * {
+	margin: 0 8%;
+}
+
 #container {
-	height: 69%;
+	height: 72%;
 	margin: -22% auto;
-	aspect-ratio: 1.6;
+	aspect-ratio: 1.45;
 	border: 5px solid yellow;
 	z-index: 1;
 	background-color: lightgoldenrodyellow;
@@ -61,7 +67,7 @@ body {
 }
 
 #question {
-	flex-basis: 100%;
+	flex-basis: 51%;
 	flex-direction: column;
 }
 
@@ -77,7 +83,7 @@ body {
 }
 
 #answer > * {
-	flex-basis: 20%;
+	flex-basis: 22%;
 }
 
 
