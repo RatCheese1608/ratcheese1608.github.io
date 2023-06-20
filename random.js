@@ -4,14 +4,14 @@ var phpDat;
 
 function getData() {
 	if (phpDat) return Promise.resolve(phpDat);
-	return fetch('storageIndex.php')
+	return fetch('storageIndex.json')
 		.then(res => {
-			console.log("res:",res.text());
+			// console.log("res:",res.text());
 			return res.json()
 		})
 		.then(data => {
-			console.log("data:",data);
-		// 	phpDat = data;
+			// console.log("data:",data);
+			phpDat = data;
 			return data;})
 		.catch(err => console.log(err));
 }
