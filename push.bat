@@ -1,6 +1,8 @@
 @echo off
 
-set "commmsg=new update or something idk"
-if "%1" == "" set "commmsg=%~1"
+set "commsg=new update or something idk"
+if not "%1" == "" set "commsg=%~1"
 
-git add . && git commit -m "commmsg" && git push -u origin master
+git add .
+git commit -m "%commsg%"
+git push -u origin master
