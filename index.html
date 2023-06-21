@@ -21,13 +21,39 @@
 </head>
 <body>
 	<div id="root">
-		<div id="battle">
-			<h1 id="player">100</h1>
-			<h1 id="enemy">100</h1>
+		<div id="battle" class="container">
+			<div id="enemy-container" class="sprite-container">
+				<div id="enemy-sprite" class="sprite">
+					<img src="Resources/golden rat.jpg" alt="Enemy Sprite">
+				</div>
+				<div class="healthbar">
+					<div class="hpdisplay"></div>
+				</div>
+			</div>
+			<div id="player-container" class="sprite-container">
+				<div class="healthbar">
+					<div class="hpdisplay"></div>
+				</div>
+				<div id="player-sprite" class="sprite">
+					<img src="Resources/rat.jpg" alt="Player Sprite">
+				</div>
+			</div>
+			<div id="actions">
+				<div id="actinfo">
+					Halo
+				</div>
+				<div id="actopt">
+					<button class="actbtn" id="Serang" onClick="">Serang</button>
+					<button class="actbtn" id='Guna' onClick="">Gunakan<br>"Item"</button>
+					<button class="actbtn" id="Mampu" onClick="">Kemampuan</button>
+					<button class="actbtn" id="Soal" onClick="">Lihat Soal Lalu</button>
+				</div>
+			</div>
 		</div>
-		<div id="container">
+		<div id="question-container" class="container">
 			<div id="question">
-				<h1>The Question</h1>
+				<h1>BONUS</h1>
+				<h2>Kerjakan Soal berikut untuk menerima bonus yang dapat berupa "power-up" atau "item"</h2>
 				<img src="" alt="question pic">
 			</div>
 			<div id="answer">
@@ -35,6 +61,7 @@
 				<button class="ansbtn" onClick="setAnsOpt('B')">B</button>
 				<button class="ansbtn" onClick="setAnsOpt('C')">C</button>
 				<button class="ansbtn" onClick="setAnsOpt('D')">D</button>
+				<button class="ansbtn" onClick="setAnsOpt('E')">E</button>
 			</div>
 			<div id="move">
 				<button id="defend" onClick="defend()">
