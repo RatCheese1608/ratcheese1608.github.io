@@ -1,0 +1,20 @@
+* {
+	font-size: 3vw;
+}
+
+#battle {
+	width: 100%;
+	border: none;
+}
+
+.sprite-container > * {
+	margin: 0 5px;
+}
+
+.sprite {
+	height: 90%;
+}
+
+.status {
+	width: 50%;
+}
