@@ -101,10 +101,13 @@ div {
 	align-items: flex-end;
 }
 
-.healthbar {
+.status {
 	width: 30%;
 	min-width: 130px;
 	height: 40px;
+}
+
+.healthbar {
 	border-radius: 10px;
 	overflow: hidden;
 }
@@ -188,7 +191,6 @@ div {
 }
 
 #answer > * {
-/*	flex-basis: 18%;*/
 	margin: auto;
 	height: 40%;
 	aspect-ratio: 4;
