@@ -18,3 +18,11 @@
 .status {
 	width: 50%;
 }
+
+#actinfo p {
+	font-size: 4vw;
+}
+
+.actbtn {
+	font-size: 3.5vw;
+}

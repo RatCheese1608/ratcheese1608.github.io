@@ -1,12 +1,14 @@
 var serv={}, cImage, promised=0;
-var qPic
+var qPic;
+var infbox;
 
 const stor = "storageIndex.json";
 const rand = "random.json"
 
+var lock = true;
 var ansOpt="";
-var enhel=100, plhel=100;
-var enemy, player;
+var attcc=0;
+var enemy={hp:100}, player={hp:100};
 
 function getData(api, callback) {
 	promised++;
@@ -29,21 +31,34 @@ function nextImage() {
 	qPic.src=serv[stor].Path+'/'+serv[stor].Images[++cImage];
 }
 
+function updtinfo(n) {
+	if (infbox.textContent==n) return;
+	console.log("infobox:",n);
+	infbox.style.opacity = 0;
+	setTimeout(()=>{
+		infbox.textContent=n;
+		infbox.style.opacity = 100;
+	},150);
+}
+
+function upd_hel(item, dec) {
+	item['hp']-=dec;
+	item['elm'].style.width=item['hp']+'%';
+}
+
+function en_att() {
+	upd_hel(player,20);
+	updtinfo("Sang Golden Rat menghancurkan Sang Regular Rat!")
+	setTimeout(()=>lock=false, 200);
+}
+
 // attack...
 function attack() {
-	if (ansOpt) {
-		nextImage();
-		if (ansOpt==serv[stor].Answers[cImage]) {
-			enhel-=10;
-			enemy.textContent = Math.max(enhel,0);
-			setTimeout(()=>{if (enhel<=0) alert("Selamat! Kamu Menang!");},100);
-		} else {
-			plhel-=30;
-			player.textContent = Math.max(plhel,0);
-			setTimeout(()=>{if (plhel<=0) alert("Kamu Kalah!");},100);
-		}
-		ansOpt=""
-	}
+	if (lock) return
+	lock = true;
+	upd_hel(enemy,10);
+	updtinfo("Sang Regular Rat menyerang Sang Golden Rat!");
+	setTimeout(en_att,1000);
 }
 
 // defend...
@@ -52,13 +67,6 @@ function defend() {
 	plhel-=15;
 	player.textContent = Math.max(plhel,0);
 	setTimeout(()=>{if (plhel<=0) alert("Kamu Kalah!");},100);
-}
-
-// load variables only when web has loaded
-window.onload = ()=> {
-	qPic = document.querySelector('img[alt="question pic"]')
-	enemy = document.querySelector("h1#enemy");
-	player = document.querySelector("h1#player");
 }
 
 // main basically
@@ -75,12 +83,18 @@ function main() {
 		preloadImage.src=serv[stor].Path+'/'+filename;
 		i++;
 	},250);
-
 	// set the first pic
 	cImage=0;
 	qPic.src=serv[stor].Path+'/'+serv[stor].Images[cImage];
 }
 
-// load from api
-getData('storageIndex.json', main)
-getData('random.json', main)
+// load variables & api only when web has loaded
+window.onload = ()=> {
+	qPic = document.querySelector('img[alt="question pic"]')
+	enemy['elm'] = document.querySelector("#enemy-container .hpdisplay");
+	player['elm'] = document.querySelector("#player-container .hpdisplay");
+	infbox = document.querySelector("#actinfo p")
+	getData('storageIndex.json', main)
+	getData('random.json', main)
+	lock=false;
+}
