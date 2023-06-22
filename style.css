@@ -57,6 +57,18 @@ div {
 	margin: 5px 0;
 }
 
+#battle > #battle-scene {
+	flex-basis: calc(100%/3*2);
+	width: 100%;
+	overflow: auto;
+	flex-direction: column;
+	margin-bottom: 0;
+}
+
+#battle-scene > div {
+	flex-basis: 50%;
+}
+
 .sprite-container {
 	display: flex;
 	height: calc(100%/3);
@@ -67,14 +79,16 @@ div {
 }
 
 .sprite {
-	width: 25%;
+	height: 110%;
+	max-height: 200px;
+	min-height: 90%;
 	z-index: 3;
 	overflow: visible;
 }
 
 .sprite > img {
-	width: 100%;
-	height: auto;
+	height: 100%;
+	width: auto;
 }
 
 #enemy-container {
@@ -89,7 +103,7 @@ div {
 
 .healthbar {
 	width: 30%;
-	min-width: 100px;
+	min-width: 130px;
 	height: 40px;
 	border-radius: 10px;
 	overflow: hidden;
@@ -106,15 +120,17 @@ div {
 	margin-left: auto;
 }
 
-#actions {
+#battle > #actions {
 	display: flex;
+	margin-top: 0;
+	padding: 5px;
 }
 
 #actions > * {
 	flex-wrap: wrap;
 	justify-content: center;
 	flex-basis: 50%;
-	margin: 0 1%;
+	margin: 0 calc(1%/3);
 }
 
 #actinfo {
@@ -122,11 +138,10 @@ div {
 }
 
 #actopt {
-	padding: 10px;
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	grid-template-rows: 1fr 1fr;
-	gap: 10px
+	gap: 8px
 }
 
 
