@@ -4,35 +4,9 @@ I don't have much to comment about because as you can see. This is just my own p
 
 [Open webpage](https://ratcheese1608.github.io)
 
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-
-NOTHING IS HERE MAN, LEAVE.
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
 ### What I do
 
-I like to scroll around reddit and try help peopel with their digital problems, mainly the vita.
+I live around degenerative social media sites like reddit, mostly lurking around topics that revolve around the PS Vita since I have good amount of knowledge when it comes to accidentally causing issues with it and fixing it.
 
 ### Support or Contact
 
