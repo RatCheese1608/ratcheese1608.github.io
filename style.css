@@ -277,3 +277,18 @@ div {
 	flex-basis: 9%;
 	display: flex;
 }
+
+#cheese-ball {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100px;
+	z-index: 4;
+	opacity: 0;
+	transition-duration: 0s;
+}
+
+#cheese-ball img{
+	width: 100%;
+	height: auto;
+}
