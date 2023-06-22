@@ -17,7 +17,7 @@
 	<meta name="twitter:image" content="https://ratcheese1608.github.io/Resources/golden%20rat.jpg">
 	<title>Funny Kimia</title>
 	<link rel="stylesheet" href="style.css">
-	<link rel="stylesheet" media="only screen and (orientation: portrait)" href="phone.css">
+	<link rel="stylesheet" media="only screen and (orientation: portrait)" href="smalley.css">
 	<script src="script.js"></script>
 </head>
 <body>
@@ -29,26 +29,30 @@
 						<img src="Resources/golden rat.jpg" alt="Enemy Sprite">
 					</div>
 					<div class="status">
-						<p id="enemy-name" class="username">
-							Golden Rat
-						</p>
-						<div>
-							<p>HP</p>
-							<div class="healthbar">
-								<div class="hpdisplay"></div>
+						<div class="wrapper">
+							<p id="enemy-name" class="username">
+								Golden Rat
+							</p>
+							<div id="hp-wrap">
+								<p>HP</p>
+								<div class="healthbar">
+									<div class="hpdisplay"></div>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div id="player-container" class="sprite-container">
 					<div class="status">
-						<p id="player-name" class="username">
-							You, The Regular Rat
-						</p>
-						<div>
-							<p>HP</p>
-							<div class="healthbar">
-								<div class="hpdisplay"></div>
+						<div class="wrapper">
+							<p id="player-name" class="username">
+								You, The Regular Rat
+							</p>
+							<div id="hp-wrap">
+								<p>HP</p>
+								<div class="healthbar">
+									<div class="hpdisplay"></div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -64,7 +68,7 @@
 					</div>
 				</div>
 				<div id="actopt">
-					<button class="actbtn" id="Serang" onClick="attack()">Serang</button>
+					<button class="actbtn" id="Serang" onClick="attack(player,enemy)">Serang</button>
 					<button class="actbtn" id='Guna' onClick="">Gunakan<br>"Item"</button>
 					<button class="actbtn" id="Mampu" onClick="">Kemampuan</button>
 					<button class="actbtn" id="Soal" onClick="">Lihat Soal Lalu</button>

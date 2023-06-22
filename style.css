@@ -13,11 +13,20 @@ body {
 	min-height: 420px;
 }
 
+.wrapper {
+	width: 100%;
+	height: 100%;
+	display: inherit;
+	flex-direction: inherit;
+	overflow: auto;
+}
+
 div {
 	box-sizing: border-box;
 /*	border: 2px solid red;*/
 	display: flex;
 }
+
 
 #root {
 	height: 100%;
@@ -105,8 +114,7 @@ div {
 	align-items: flex-end;
 }
 
-#player-container * {
-	justify-content: flex-end;
+#player-container .wrapper {
 	align-items: flex-end;
 }
 
@@ -124,11 +132,11 @@ div {
 	box-shadow: 0 0 calc(5px/4) 5px #1A331A;
 }
 
-.status > * {
+.status > .wrapper > * {
 	margin: 5px 0;
 }
 
-.status > div {
+.status #hp-wrap {
 	width: 75%;
 	flex-basis: 50%;
 	display: flex;
@@ -138,15 +146,15 @@ div {
 	border-radius: 10px;
 }
 
-.status > div > * {
+.status #hp-wrap > * {
 	margin: 0 2.5px;
 }
 
-.status > div > p {
+.status #hp-wrap > p {
 	color: orange;
 }
 
-.status > p {
+.status > .wrapper > p {
 	flex-basis: 50%;
 	display: flex;
 	align-items: center !important;
@@ -206,6 +214,7 @@ div {
 	display: block;
 	width: 100%;
 	font-size: 2vw;
+	transition-duration: .1s;
 }
 
 #actopt {

@@ -2,6 +2,9 @@ var serv={}, cImage, promised=0;
 var qPic;
 var infbox;
 var cheese;
+var resmsg;
+var defmsg="Pilihlah sebuah aksi!"
+var lasmsg=defmsg;
 
 const stor = "storageIndex.json";
 const rand = "random.json"
@@ -9,7 +12,11 @@ const rand = "random.json"
 var lock = true;
 var ansOpt="";
 var turn=1;
-var enemy={hp:100}, player={hp:100};
+var enemy={id:'en', hp:100, elm:'', img:''}, player={id:'pl', hp:100, elm:'', img:''};
+
+// https://stream.mywape.app/view/4107650
+// https://boards.4chan.org/gif/thread/25367639
+// https://boards.4chan.org/gif/thread/25379483
 
 function getData(api, callback) {
 	promised++;
@@ -52,12 +59,23 @@ function nextImage() {
 
 function updtinfo(n) {
 	if (infbox.textContent==n) return;
+	lasmsg=n;
 	console.log("infobox:",n);
 	infbox.style.opacity = 0;
 	setTimeout(()=>{
 		infbox.textContent=n;
 		infbox.style.opacity = 100;
 	},150);
+	if (lasmsg!=defmsg) {
+		if (resmsg!='') clearInterval(resmsg);
+		resmsg = setInterval(()=>{
+			if (lasmsg==infbox.textContent && lasmsg!=defmsg) {
+				clearInterval(resmsg);
+				resmsg='';
+				updtinfo(defmsg);
+			}
+		},2500);
+	}
 }
 
 function q_event() {
@@ -65,14 +83,8 @@ function q_event() {
 }
 
 function upd_hel(item, dec) {
-	item['hp']=Math.max(item['hp']-dec, 0);
-	item['elm'].style.width=item['hp']+'%';
-}
-
-function en_att() {
-	upd_hel(player,20);
-	updtinfo("Sang Golden Rat menghancurkan Sang Regular Rat!")
-	setTimeout(()=>lock=false, 200);
+	item.hp=Math.max(item.hp-dec, 0);
+	item.elm.style.width=item.hp+'%';
 }
 
 function cheesefly(source, target) {
@@ -99,28 +111,28 @@ function cheesefly(source, target) {
 }
 
 // attack...
-function attack() {
+function attack(source, target) {
 	if (!turn%3) {
 		q_event()
 		return;
 	}
-	if (lock) return
-	lock = true;
-	cheesefly(player['img'],enemy['img'])
-	setTimeout(()=>{
-		upd_hel(enemy,10);
-		updtinfo("Sang Regular Rat menyerang Sang Golden Rat!");
-	},600);
-	setTimeout(en_att,1000);
-	turn++;
-}
-
-// defend...
-function defend() {
-	nextImage();
-	plhel-=15;
-	player.textContent = Math.max(plhel,0);
-	setTimeout(()=>{if (plhel<=0) alert("Kamu Kalah!");},100);
+	if (lock && source==player) return
+	cheesefly(source.img,target.img)
+	if (source == player) {
+		lock = true;
+		setTimeout(()=>{
+			upd_hel(enemy,10);
+			updtinfo("Sang Regular Rat menyerang Sang Golden Rat!");
+			setTimeout(()=>attack(target,source),500);
+		},600);
+		turn++;
+	}  else {
+		setTimeout(()=>{
+			upd_hel(player,20);
+			updtinfo("Sang Golden Rat menghancurkan Sang Regular Rat!")
+			setTimeout(()=>lock=false, 650);
+		},600);
+	}
 }
 
 // main basically
@@ -145,10 +157,10 @@ function main() {
 // load variables & api only when web has loaded
 window.onload = ()=> {
 	qPic = document.querySelector('img[alt="question pic"]')
-	enemy['elm'] = document.querySelector("#enemy-container .hpdisplay");
-	enemy['img'] = document.querySelector("#enemy-container img");
-	player['elm'] = document.querySelector("#player-container .hpdisplay");
-	player['img'] = document.querySelector("#player-container .sprite img");
+	enemy.elm = document.querySelector("#enemy-container .hpdisplay");
+	enemy.img = document.querySelector("#enemy-container img");
+	player.elm = document.querySelector("#player-container .hpdisplay");
+	player.img = document.querySelector("#player-container .sprite img");
 	infbox = document.querySelector("#actinfo p")
 	cheese = document.querySelector("#cheese-ball")
 	getData('storageIndex.json', main)
