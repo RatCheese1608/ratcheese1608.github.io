@@ -1,5 +1,6 @@
 var serv={}, cImage, promised=0;
 var qPic;
+var qCont;
 var infbox;
 var cheese;
 var resmsg;
@@ -11,12 +12,8 @@ const rand = "random.json"
 
 var lock = true;
 var ansOpt="";
-var turn=1;
+var turn=2;
 var enemy={id:'en', hp:100, elm:'', img:''}, player={id:'pl', hp:100, elm:'', img:''};
-
-// https://stream.mywape.app/view/4107650
-// https://boards.4chan.org/gif/thread/25367639
-// https://boards.4chan.org/gif/thread/25379483
 
 function getData(api, callback) {
 	promised++;
@@ -64,7 +61,7 @@ function updtinfo(n) {
 	infbox.style.opacity = 0;
 	setTimeout(()=>{
 		infbox.textContent=n;
-		infbox.style.opacity = 100;
+		infbox.style.opacity=1;
 	},150);
 	if (lasmsg!=defmsg) {
 		if (resmsg!='') clearInterval(resmsg);
@@ -79,7 +76,9 @@ function updtinfo(n) {
 }
 
 function q_event() {
-	console.log('Question TIME!')
+	console.log('Question TIME!');
+	qCont.style.display='flex';
+	setTimeout(()=>qCont.style.opacity=1,200);
 }
 
 function upd_hel(item, dec) {
@@ -112,20 +111,21 @@ function cheesefly(source, target) {
 
 // attack...
 function attack(source, target) {
-	if (!turn%3) {
-		q_event()
+	if (lock && source==player) return
+	if (source==player && turn%3==0) {
+		lock = true;
+		q_event();
 		return;
 	}
-	if (lock && source==player) return
 	cheesefly(source.img,target.img)
 	if (source == player) {
 		lock = true;
+		turn++;
 		setTimeout(()=>{
 			upd_hel(enemy,10);
 			updtinfo("Sang Regular Rat menyerang Sang Golden Rat!");
 			setTimeout(()=>attack(target,source),500);
 		},600);
-		turn++;
 	}  else {
 		setTimeout(()=>{
 			upd_hel(player,20);
@@ -133,6 +133,25 @@ function attack(source, target) {
 			setTimeout(()=>lock=false, 650);
 		},600);
 	}
+}
+
+function tolak() {
+	qCont.style.opacity=0;
+	setTimeout(()=>{
+		qCont.style.display='none';
+		cImage++;
+		lock=false;
+	},200);
+	turn = 1;
+}
+
+function terima() {
+	if (serv[stor].Answers[cImage] == ansOpt) {
+		console.log("Selamat kamu betul")
+	} else {
+		console.log("YAHAHAH KAMU SALAH")
+	}
+	tolak()
 }
 
 // main basically
@@ -156,7 +175,8 @@ function main() {
 
 // load variables & api only when web has loaded
 window.onload = ()=> {
-	qPic = document.querySelector('img[alt="question pic"]')
+	qPic = document.querySelector('img[alt="question pic"]');
+	qCont = document.querySelector('#question-container');
 	enemy.elm = document.querySelector("#enemy-container .hpdisplay");
 	enemy.img = document.querySelector("#enemy-container img");
 	player.elm = document.querySelector("#player-container .hpdisplay");

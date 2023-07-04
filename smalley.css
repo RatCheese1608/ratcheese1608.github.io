@@ -27,6 +27,16 @@
 	font-size: 3.5vw;
 }
 
+#answer {
+	flex-direction: column;
+}
+
+#answer > * {
+	margin: auto 0;
+	width: auto;
+	flex-basis: 18%;
+}
+
 #cheese-ball {
 	width: 75px;
 }

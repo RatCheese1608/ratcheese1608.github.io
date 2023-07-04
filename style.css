@@ -52,7 +52,7 @@ div {
 	margin: auto;
 	height: 100%;
 	width: 75%;
-	border: 5px solid darkgreen;
+/*	border: 5px solid darkgreen;*/
 	display: flex;
 	justify-content: space-around;
 	background-color: lightgreen;
@@ -239,13 +239,15 @@ div {
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	height: 70%;
-	aspect-ratio: 2;
+	height: 80%;
+	width: 70%;
 	border: 5px solid yellow;
-	z-index: 1;
+	border-radius: 25px;
+	z-index: 10;
 	background-color: lightgoldenrodyellow;
 	flex-direction: column;
 	display: none;
+	opacity: 0;
 }
 
 #question-container > * {
@@ -255,36 +257,47 @@ div {
 	padding: 1vh;
 	display: flex;
 	justify-content: space-between;
+	height: 50%;
 }
 
 #question {
-	flex-basis: 51%;
+	flex-basis: 50%;
 	flex-direction: column;
+	background-color: white;
+	align-items: center;
 }
 
-#question > img {
+#question img {
+	height: auto;
+	width: auto;
 	max-height: 100%;
-	margin: auto;
-	display: block;
+	margin: 0 auto;
 }
 
+#question > .wrapper {
+	height: 100%;
+}
 
 #answer {
-	flex-basis: 26%;
-	flex-wrap: wrap;
+	flex-basis: 40%;
 	justify-content: space-around;
 }
 
 #answer > * {
-	margin: auto;
-	height: 40%;
-	aspect-ratio: 4;
+	margin: 0 auto;
+	height: auto;
+	flex-basis: 18%;
 }
 
-
 #move {
-	flex-basis: 9%;
+	flex-basis: 10%;
 	display: flex;
+	justify-content: space-around;
+}
+
+#move > *{
+	margin: 0 auto;
+	flex-basis: 30%;
 }
 
 #cheese-ball {
