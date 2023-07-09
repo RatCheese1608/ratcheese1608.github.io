@@ -50,10 +50,6 @@ function setAnsOpt(n) {
 	ansOpt=n;
 }
 
-function nextImage() {
-	qPic.src=serv[stor].Path+'/'+serv[stor].Images[++cImage];
-}
-
 function updtinfo(n) {
 	if (infbox.textContent==n) return;
 	lasmsg=n;
@@ -139,7 +135,8 @@ function tolak() {
 	qCont.style.opacity=0;
 	setTimeout(()=>{
 		qCont.style.display='none';
-		cImage++;
+		// next images
+		qPic.src=serv[stor].Path+'/'+serv[stor].Images[++cImage];
 		lock=false;
 	},200);
 	turn = 1;
