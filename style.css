@@ -6,11 +6,15 @@
 	font-size: 1.2vw;
 }
 
+html {
+	overflow: hidden;
+}
+
 body {
 	width: 100vw;
 	height: 100vh;
-	min-width: 380px;
-	min-height: 420px;
+	overflow: auto;
+/*	background-color: red;*/
 }
 
 .wrapper {
@@ -28,24 +32,17 @@ div {
 	flex-direction: column;
 }
 
-
 #root {
-	height: 100%;
 	width: 100%;
-	overflow: hidden;
-	display: flex;
+	height: 100%;
+	overflow: auto;
 	justify-content: center;
 	background-color: #ACDEFD;
 }
 
 .container {
-	display: flex;
 	overflow: hidden;
 	padding: 25px;
-}
-
-#question-container {
-	margin-bottom: 0;
 }
 
 /*battling*/
@@ -54,7 +51,6 @@ div {
 	height: 100%;
 	width: 75%;
 /*	border: 5px solid darkgreen;*/
-	display: flex;
 	justify-content: space-around;
 	background-color: lightgreen;
 	padding: 0 !important;
@@ -80,7 +76,6 @@ div {
 }
 
 .sprite-container {
-	display: flex;
 	height: calc(100%/3);
 	flex-direction: row !important;
 }
@@ -122,7 +117,6 @@ div {
 .status {
 	width: 35%;
 	height: 30%;
-	display: flex;
 	justify-content: space-around;
 	background-color: lightyellow;
 	padding:  5px 10px;
@@ -139,7 +133,6 @@ div {
 .status #hp-wrap {
 	width: 75%;
 	flex-basis: 50%;
-	display: flex;
 	background-color: #333333;
 	padding: 5px 5px;
 	border-radius: 10px;
@@ -182,7 +175,6 @@ div {
 }
 
 #actions {
-	display: flex;
 	margin-top: 0;
 	padding: 5px 2.5px;
 	background-color: dimgray;
@@ -236,19 +228,31 @@ div {
 }
 
 .pop-up {
-	position: absolute;
+	position: fixed;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	height: 80%;
-	width: 70%;
+	width: 70vw;
+	height: 80vh;
 	border-radius: 25px;
 	z-index: 10;
 	display: none;
 	opacity: 0;
 }
 
+.pop-close {
+	width: 25px;
+	height: 25px;
+}
+
+.pop-up > h1 {
+	width: 50%;
+	text-align: center;
+	margin: 20px auto !important;
+}
+
 /* event question */
+
 #question-container {
 	border: 5px solid yellow;
 	background-color: lightgoldenrodyellow;
@@ -258,7 +262,6 @@ div {
 	border: 2px solid red;
 	text-align: center;
 	padding: 1vh;
-	display: flex;
 	justify-content: space-between;
 	height: 50%;
 }
@@ -270,9 +273,10 @@ div {
 }
 
 #question img {
-	height: auto;
-	width: auto;
-	max-height: 100%;
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
 	margin: 0 auto;
 }
 
@@ -294,7 +298,6 @@ div {
 
 #move {
 	flex-basis: 10%;
-	display: flex;
 	justify-content: space-around;
 	flex-direction: row;
 }
@@ -310,28 +313,21 @@ div {
 	align-items: flex-end;
 }
 
-#tutorial-container > button {
-	width: 25px;
-}
-
-#tutorial-container > h1, #tutorial-container > p {
+#tutorial-container > h1, #tutorial-container > p,
+#start-container > h1, #start-container > div,
+#past-container > h1, #past-container > div,
+#item-container > h1, #item-container > div {
 	margin: auto;
 	padding: 20px;
 	background-color: white;
 	border-radius: 25px;
 }
+
 
 #start-container {
 	background-color: powderblue;
 	border: 10px solid dodgerblue;
 	z-index: 4;
-}
-
-#start-container > h1, #start-container > div {
-	margin: auto;
-	padding: 20px;
-	background-color: white;
-	border-radius: 25px;
 }
 
 #start-container > div {
@@ -344,6 +340,67 @@ div {
 	flex-basis: 40%;
 }
 
+#past-container {
+	background-color: plum;
+	border: 10px solid blueviolet;
+	align-items: flex-end;
+}
+
+#past-container .wrapper {
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+
+#past-container .wrapper > * {
+	flex-basis: 45%;
+	margin: 10px auto;
+}
+
+#past-template {
+	display: none;
+}
+
+.template-pq {
+	border: 5px solid red;
+	height: 45%;
+}
+
+.template-pq > img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+}
+
+#item-container {
+	background-color: burlywood;
+	border: 10px solid chocolate;
+	align-items: flex-end;
+}
+
+#item-container .wrapper {
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+
+#item-container .wrapper > * {
+	flex-basis: 95%;
+	margin: 10px auto;
+}
+
+#item-template {
+	display: none;
+}
+
+.template-it {
+	align-items: center;
+	border: 5px solid green;
+	height: 20%;
+	text-align: center;
+	background-color: lawngreen;
+}
 
 #cheese-ball {
 	position: absolute;

@@ -1,9 +1,15 @@
-var serv={}, cImage, promised=0;
+var serv={};
+var qCount={def:8, sp:''};
+var itemCount={val:0};
+var promised=0;
+var skipQ=new Set();
 var qPic;
 var qCont;
 var infbox;
 var cheese;
 var resmsg;
+var pastmp;
+var itmtmp;
 var defmsg="Pilihlah sebuah aksi!"
 var lasmsg=defmsg;
 
@@ -81,36 +87,83 @@ function hide_popup(target){
 	setTimeout(()=>target.style.display='none',200);
 }
 
-function q_event() {
+function q_event(n) {
 	console.log('Question TIME!');
-	show_popup(qCont);
+	lock = true;
+	if (typeof(n)=="number") {
+		console.log("spec",qCount)
+		hide_popup(document.querySelector("#past-container"))
+		qCount.sp=n;
+		setTimeout(()=>{
+			qPic.src=serv[stor].Path+'/'+serv[stor].Images[n];
+			show_popup(qCont);
+		},200);
+	} else {
+		turn = 1;
+		if (qCount.def<=9) {
+			show_popup(qCont);
+		}
+	}
 }
 
-function decline() {
+function closeQ() {
+	console.log(qCount)
 	hide_popup(qCont);
 	setTimeout(()=>{
-		// next images
-		qPic.src=serv[stor].Path+'/'+serv[stor].Images[++cImage];
 		lock=false;
-	},200);
-	turn = 1;
+	},500);
+	ansOpt='';
 }
 
 function accept() {
-	if (serv[stor].Answers[cImage] == ansOpt) {
-		console.log("Selamat kamu betul")
+	if (ansOpt=='') return;
+	console.log(qCount)
+	a = qCount.def;
+	if (typeof(qCount.sp)=="number") {
+		console.log('hullo')
+		a = qCount.sp;
+		document.querySelector("#pq-"+a).remove();
+		skipQ.delete(a);
+		qCount.sp='';
+	} else qCount.def++;
+	if (serv[stor].Answers[a] == ansOpt) {
+		updtinfo("Selamat kamu betul! Kamu telah mendapatkan sebuah ITEM!");
+		console.log("Selamat kamu betul");
+		let clone = itmtmp.cloneNode(true);
+		clone.id="";
+		clone.textContent=serv[stor].Items[itemCount.val++];
+		itemCount.val%=7;
+		itmtmp.parentNode.appendChild(clone);
 	} else {
+		updtinfo("Gawat! Kamu ternyata salah!");
 		console.log("YAHAHAH KAMU SALAH")
 	}
-	decline()
+	qPic.src=serv[stor].Path+'/'+serv[stor].Images[qCount.def];
+	closeQ()
+}
+
+function decline() {
+	closeQ();
+	console.log(qCount)
+	a = qCount.def;
+	if (typeof(qCount.sp)=="number") a = qCount.sp;
+	else qCount.def++;
+	if (skipQ.has(a)==false) {
+		skipQ.add(a);
+		let clone = pastmp.cloneNode(true);
+		clone.id="pq-"+a;
+		clone.children[0].src=serv[stor].Path+'/'+serv[stor].Images[a];
+		clone.setAttribute("onclick","q_event("+a+")");
+		pastmp.parentNode.appendChild(clone);
+	}
 }
 
 function upd_hel(item, dec) {
-	item.hp=Math.max(item.hp-dec, 0);
+	item.hp=Math.min(Math.max(item.hp-dec, 0), 100);
 	item.elm.style.width=item.hp+'%';
 	setTimeout(()=>{
 		if (item.hp==0) {
-			lock=trye
+			lock=true
 			if (item.id=="pl") {
 				window.location.href = "lose.html";
 			} else {
@@ -147,7 +200,6 @@ function cheesefly(source, target) {
 function attack(source, target) {
 	if (lock && source==player) return
 	if (source==player && turn%3==0) {
-		lock = true;
 		q_event();
 		return;
 	}
@@ -162,11 +214,22 @@ function attack(source, target) {
 		},600);
 	}  else {
 		setTimeout(()=>{
-			upd_hel(player,20);
-			updtinfo("Sang Golden Rat menghancurkan Sang Regular Rat!")
+			upd_hel(player,30);
+			updtinfo("Sang Golden Rat menghancurkan Sang Regular Rat!");
 			setTimeout(()=>lock=false, 650);
 		},600);
 	}
+}
+
+function item_use(target) {
+	lock = 1;
+	hide_popup(document.querySelector("#item-container"));
+	target.remove();
+	setTimeout(()=>{
+		upd_hel(player,-60);
+		updtinfo("Kamu telah menggunakan ITEM!");
+	}, 200);
+	setTimeout(()=>lock=false, 1000);
 }
 
 // main basically
@@ -184,8 +247,7 @@ function main() {
 		i++;
 	},250);
 	// set the first pic
-	cImage=0;
-	qPic.src=serv[stor].Path+'/'+serv[stor].Images[cImage];
+	qPic.src=serv[stor].Path+'/'+serv[stor].Images[qCount.def];	
 }
 
 // load variables & api only when web has loaded
@@ -198,6 +260,8 @@ window.onload = ()=> {
 	player.img = document.querySelector("#player-container .sprite img");
 	infbox = document.querySelector("#actinfo p")
 	cheese = document.querySelector("#cheese-ball")
+	pastmp = document.querySelector("#past-template")
+	itmtmp = document.querySelector("#item-template")
 	getData('storageIndex.json', main)
 	// getData('random.json', main)
 	lock=false;

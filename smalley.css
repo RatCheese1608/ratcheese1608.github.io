@@ -4,7 +4,6 @@
 
 #battle {
 	width: 100%;
-	border: none;
 }
 
 .container {
@@ -41,9 +40,21 @@
 	flex-basis: 18%;
 }
 
+.pop-up {
+	width: 95vw;
+}
+
 #start-container > * {
 	width: 100% !important;
 	box-sizing: border-box;
+}
+
+#past-container .wrapper > * {
+	flex-basis: 95%;
+}
+
+#past-container .wrapper{
+	padding: 5px;
 }
 
 #cheese-ball {

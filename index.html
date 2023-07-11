@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
 	<meta property="og:site_name" content="AlCheesy">
 	<meta property=“og:title” content="Cheesing Chemistry">
 	<meta property="og:description" content="The rat has been fooled by his teacher to make a web app that teaches thermochemistry." />
@@ -69,9 +69,9 @@
 				</div>
 				<div id="actopt">
 					<button class="actbtn" id="Att" onClick="attack(player,enemy)">Serang</button>
-					<button class="actbtn" id='Use' onClick="">Gunakan<br>"Item"</button>
+					<button class="actbtn" id='Use' onClick="show_popup(document.querySelector('#item-container'))">Gunakan<br>"Item"</button>
 					<button class="actbtn" id="Tutor" onClick="show_popup(document.querySelector('#tutorial-container'))">Tutorial</button>
-					<button class="actbtn" id="PastQ" onClick="">Lihat Soal Lalu</button>
+					<button class="actbtn" id="PastQ" onClick="show_popup(document.querySelector('#past-container'))">Lihat Soal Lalu</button>
 				</div>
 			</div>
 		</div>
@@ -103,18 +103,35 @@
 			</div>
 		</div>
 		<div id="tutorial-container" class="container pop-up">
-			<button onclick="hide_popup(document.querySelector('#tutorial-container'))">X</button>
-			<h1 style="width: 50%; text-align: center; margin: 25px auto;">TUTORIAL</h1>
-			<p style="white-space: pre-wrap">Cara bermain:
+			<button onclick="hide_popup(this.parentNode)" class="pop-close">X</button>
+			<h1 style="width:50%; text-align:center; margin:25px auto;">TUTORIAL</h1>
+			<p style="white-space:pre-wrap; overflow:auto;">Cara bermain:
 1. Pada ronde pertama, kamu hanya bisa menyerang lawan kamu dengan memencet tombol “Serang”.
 2. Setelah beberapa ronde, kamu akan diberikan sebuah soal PG dimana jika kamu menjawab dengan benar, kamu akan diberikan suatu hadiah “Item” yang dapat membantu kamu.
-3. Kamu juga dapat menolak untuk menjawab. Soal yang kamu tolak dapat kamu lihat kembali melalui tombol "Lihat Soal Lalu"
-4. Saat HP lawan atau kamu sudah habis, permainan akan berakhir. Jika HP lawan yang lebih awal habis, maka kamu dinyatakan sebagai pemenangnya. Jika HP kamu yang lebih awal habis, maka kamu dinyatakan kalah.
+3. Kamu juga dapat menolak untuk menjawab. Soal yang kamu lompat dapat kamu lihat kembali melalui tombol "Lihat Soal Lalu".
+4. Dengan menggunakan "Lihat Soal Lalu", kamu dapat memencet soal yang telah kamu lompat.
+5. Saat HP lawan atau kamu sudah habis, permainan akan berakhir. Jika HP lawan yang lebih awal habis, maka kamu dinyatakan sebagai pemenangnya. Jika HP kamu yang lebih awal habis, maka kamu dinyatakan kalah.
 
 Untuk melihat kembali tutorial ini, pencet saja tombol "Tutorial".
 
 Kamu bisa menutup halaman tutorial ini dengan memencet tombol "X" yang ada di atas.
 </p>
+		</div>
+		<div id="past-container" class="container pop-up">
+			<button onclick="hide_popup(this.parentNode)" class="pop-close">X</button>
+			<h1>SOAL-SOAL LALU</h1>
+			<div class="wrapper">
+				<div id="past-template" class="template-pq wrapper">
+					<img src="">
+				</div>
+			</div>
+		</div>
+		<div id="item-container" class="container pop-up">
+			<button onclick="hide_popup(this.parentNode)" class="pop-close">X</button>
+			<h1>ITEM</h1>
+			<div class="wrapper">
+				<button id="item-template" class="template-it wrapper" onclick="item_use(this)">COOKIE</button>
+			</div>
 		</div>
 		<div id="start-container" class="container pop-up">
 			<h1 style="width: 50%; text-align: center; margin: 25px auto;">Chemistry Smart Mobile Games</h1>
