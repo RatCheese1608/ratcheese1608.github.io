@@ -7,6 +7,10 @@
 	border: none;
 }
 
+.container {
+	padding: 15px;
+}
+
 .sprite-container > * {
 	margin: 0 5px;
 }
@@ -35,6 +39,11 @@
 	margin: auto 0;
 	width: auto;
 	flex-basis: 18%;
+}
+
+#start-container > * {
+	width: 100% !important;
+	box-sizing: border-box;
 }
 
 #cheese-ball {

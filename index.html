@@ -68,17 +68,17 @@
 					</div>
 				</div>
 				<div id="actopt">
-					<button class="actbtn" id="Serang" onClick="attack(player,enemy)">Serang</button>
-					<button class="actbtn" id='Guna' onClick="">Gunakan<br>"Item"</button>
-					<button class="actbtn" id="Mampu" onClick="">Kemampuan</button>
-					<button class="actbtn" id="Soal" onClick="">Lihat Soal Lalu</button>
+					<button class="actbtn" id="Att" onClick="attack(player,enemy)">Serang</button>
+					<button class="actbtn" id='Use' onClick="">Gunakan<br>"Item"</button>
+					<button class="actbtn" id="Tutor" onClick="show_popup(document.querySelector('#tutorial-container'))">Tutorial</button>
+					<button class="actbtn" id="PastQ" onClick="">Lihat Soal Lalu</button>
 				</div>
 			</div>
 		</div>
-		<div id="question-container" class="container">
+		<div id="question-container" class="container pop-up">
 			<div id="question">
 				<h1>BONUS</h1>
-				<h2>Kerjakan Soal berikut untuk menerima bonus yang dapat berupa "power-up" atau "item"</h2>
+				<h2>Kerjakan Soal berikut untuk menerima bonus "item"</h2>
 				<div class="wrapper">
 					<img src="" alt="question pic">
 				</div>
@@ -91,20 +91,45 @@
 				<button class="ansbtn" onClick="setAnsOpt('E')">E</button>
 			</div>
 			<div id="move">
-				<button id="tolak" onClick="tolak()">
+				<button id="tolak" onClick="decline()">
 					<h2>TOLAK</h2>
 					<p>Lompatkan Soalnya</p>
 				</button>
 				<h1>PILIH</h1>
-				<button id="terima" onClick="terima()">
+				<button id="terima" onClick="accept()">
 					<h2>TERIMA</h2>
 					<p>Jawab Soalnya</p>
 				</button>
+			</div>
+		</div>
+		<div id="tutorial-container" class="container pop-up">
+			<button onclick="hide_popup(document.querySelector('#tutorial-container'))">X</button>
+			<h1 style="width: 50%; text-align: center; margin: 25px auto;">TUTORIAL</h1>
+			<p style="white-space: pre-wrap">Cara bermain:
+1. Pada ronde pertama, kamu hanya bisa menyerang lawan kamu dengan memencet tombol “Serang”.
+2. Setelah beberapa ronde, kamu akan diberikan sebuah soal PG dimana jika kamu menjawab dengan benar, kamu akan diberikan suatu hadiah “Item” yang dapat membantu kamu.
+3. Kamu juga dapat menolak untuk menjawab. Soal yang kamu tolak dapat kamu lihat kembali melalui tombol "Lihat Soal Lalu"
+4. Saat HP lawan atau kamu sudah habis, permainan akan berakhir. Jika HP lawan yang lebih awal habis, maka kamu dinyatakan sebagai pemenangnya. Jika HP kamu yang lebih awal habis, maka kamu dinyatakan kalah.
+
+Untuk melihat kembali tutorial ini, pencet saja tombol "Tutorial".
+
+Kamu bisa menutup halaman tutorial ini dengan memencet tombol "X" yang ada di atas.
+</p>
+		</div>
+		<div id="start-container" class="container pop-up">
+			<h1 style="width: 50%; text-align: center; margin: 25px auto;">Chemistry Smart Mobile Games</h1>
+			<div>
+				<button onclick="hide_popup(document.querySelector('#start-container'))">MULAI</button>
+				<button onclick="show_popup(document.querySelector('#tutorial-container'))">TUTORIAL</button>
 			</div>
 		</div>
 	</div>
 	<div id="cheese-ball">
 		<img src="Resources/cheese.png" alt="CHEESE MAGIC">
 	</div>
+	<script>
+		document.querySelector('#start-container').style.display='flex';
+		document.querySelector('#start-container').style.opacity=1;
+	</script>
 </body>
 </html>

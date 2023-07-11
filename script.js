@@ -71,15 +71,53 @@ function updtinfo(n) {
 	}
 }
 
+function show_popup(target) {
+	target.style.display='flex';
+	setTimeout(()=>target.style.opacity=1,200);
+}
+
+function hide_popup(target){
+	target.style.opacity=0;
+	setTimeout(()=>target.style.display='none',200);
+}
+
 function q_event() {
 	console.log('Question TIME!');
-	qCont.style.display='flex';
-	setTimeout(()=>qCont.style.opacity=1,200);
+	show_popup(qCont);
+}
+
+function decline() {
+	hide_popup(qCont);
+	setTimeout(()=>{
+		// next images
+		qPic.src=serv[stor].Path+'/'+serv[stor].Images[++cImage];
+		lock=false;
+	},200);
+	turn = 1;
+}
+
+function accept() {
+	if (serv[stor].Answers[cImage] == ansOpt) {
+		console.log("Selamat kamu betul")
+	} else {
+		console.log("YAHAHAH KAMU SALAH")
+	}
+	decline()
 }
 
 function upd_hel(item, dec) {
 	item.hp=Math.max(item.hp-dec, 0);
 	item.elm.style.width=item.hp+'%';
+	setTimeout(()=>{
+		if (item.hp==0) {
+			lock=trye
+			if (item.id=="pl") {
+				window.location.href = "lose.html";
+			} else {
+				window.location.href = "win.html";
+			}
+		}
+	},750);
 }
 
 function cheesefly(source, target) {
@@ -129,26 +167,6 @@ function attack(source, target) {
 			setTimeout(()=>lock=false, 650);
 		},600);
 	}
-}
-
-function tolak() {
-	qCont.style.opacity=0;
-	setTimeout(()=>{
-		qCont.style.display='none';
-		// next images
-		qPic.src=serv[stor].Path+'/'+serv[stor].Images[++cImage];
-		lock=false;
-	},200);
-	turn = 1;
-}
-
-function terima() {
-	if (serv[stor].Answers[cImage] == ansOpt) {
-		console.log("Selamat kamu betul")
-	} else {
-		console.log("YAHAHAH KAMU SALAH")
-	}
-	tolak()
 }
 
 // main basically
