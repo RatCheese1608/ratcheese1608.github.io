@@ -1,5 +1,5 @@
 var serv={};
-var qCount={def:8, sp:''};
+var qCount={def:0, sp:''};
 var itemCount={val:0};
 var promised=0;
 var skipQ=new Set();
@@ -88,6 +88,7 @@ function hide_popup(target){
 }
 
 function q_event(n) {
+	// console.log("event",qCount)
 	console.log('Question TIME!');
 	lock = true;
 	if (typeof(n)=="number") {
@@ -100,14 +101,13 @@ function q_event(n) {
 		},200);
 	} else {
 		turn = 1;
-		if (qCount.def<=9) {
-			show_popup(qCont);
-		}
+		show_popup(qCont);
 	}
 }
 
 function closeQ() {
-	console.log(qCount)
+	// console.log("close",qCount)
+	qCount.sp='';
 	hide_popup(qCont);
 	setTimeout(()=>{
 		lock=false;
@@ -124,7 +124,6 @@ function accept() {
 		a = qCount.sp;
 		document.querySelector("#pq-"+a).remove();
 		skipQ.delete(a);
-		qCount.sp='';
 	} else qCount.def++;
 	if (serv[stor].Answers[a] == ansOpt) {
 		updtinfo("Selamat kamu betul! Kamu telah mendapatkan sebuah ITEM!");
@@ -143,8 +142,6 @@ function accept() {
 }
 
 function decline() {
-	closeQ();
-	console.log(qCount)
 	a = qCount.def;
 	if (typeof(qCount.sp)=="number") a = qCount.sp;
 	else qCount.def++;
@@ -156,6 +153,9 @@ function decline() {
 		clone.setAttribute("onclick","q_event("+a+")");
 		pastmp.parentNode.appendChild(clone);
 	}
+	closeQ();
+	setTimeout(()=>qPic.src=serv[stor].Path+'/'+serv[stor].Images[qCount.def],200)
+	// console.log("out dec",qCount)
 }
 
 function upd_hel(item, dec) {
@@ -199,7 +199,7 @@ function cheesefly(source, target) {
 // attack...
 function attack(source, target) {
 	if (lock && source==player) return
-	if (source==player && turn%3==0) {
+	if (source==player && turn%3==0 && qCount.def<=9) {
 		q_event();
 		return;
 	}
@@ -209,13 +209,13 @@ function attack(source, target) {
 		turn++;
 		setTimeout(()=>{
 			upd_hel(enemy,10);
-			updtinfo("Sang Regular Rat menyerang Sang Golden Rat!");
+			updtinfo("Kamu menyerang Evil Labman!");
 			setTimeout(()=>attack(target,source),500);
 		},600);
 	}  else {
 		setTimeout(()=>{
 			upd_hel(player,30);
-			updtinfo("Sang Golden Rat menghancurkan Sang Regular Rat!");
+			updtinfo("Evil Labman menghancurkan Kamu!");
 			setTimeout(()=>lock=false, 650);
 		},600);
 	}
